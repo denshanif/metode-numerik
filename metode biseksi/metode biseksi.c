@@ -3,9 +3,9 @@
 
 float f(float x);
 
-float x, a, b, fx, fa, fb, e;
+float x, a, b, fx, fa, fb, fi[10], e;
 
-int iterasi;
+int i, n = 10;
 
 void main() {
     printf("Tentukan nilai a: ");
@@ -24,25 +24,27 @@ void main() {
     }
     else {
         printf("\nIterasi\t\ta\t\tb\t\tx\t\tf(x)\t\tf(a)\n");
-        do {
+        for (i = 0; i <= n; i++) {
             x = (a + b)/2;
             fx = f(x);
 
-            printf("%d\t\t%f\t%f\t%f\t%f\t%f\n", iterasi + 1, a, b, x, fx, fa);
+            printf("%d\t\t%f\t%f\t%f\t%f\t%f\n", i + 1, a, b, x, fx, fa);
 
-            if ((fx * fa) < 0 || (fabs(fx) < e)) {
-                b = x;
-                fb = fx;
-            }
-            else {
-                a = x;
-                fa = fx;
-            }
-            iterasi = iterasi + 1;
-        }while(fabs(b - a) > e);
+	        if ((fx * fa) < 0) {
+	            b = x;
+	            fb = fx;
+	        }
+	        else {
+	            a = x;
+	            fa = fx;
+	        }
+
+            if (fabs(b - a) <= e)
+            	break;
+        }
     }
 
-    printf("Pada iterasi ke-%d diperoleh x = %f dan f(x) = %f", iterasi, x, fx);
+    printf("\nPada iterasi ke-%d diperoleh x = %f dan f(x) = %f\n", i+1, x, fx);
 }
 
 float f(float x) {
