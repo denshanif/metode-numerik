@@ -2,8 +2,9 @@
 #include <stdio.h>
 #include <math.h>
 
-// Pendefinisian fungsi, yakni f(x) = (exp(-x)) -x
+// Pendefinisian fungsi, yakni f(x) = e^-x - x
 float f(float x) {
+
     float y;
 
     y = (exp(-x)) - x;
@@ -11,7 +12,7 @@ float f(float x) {
 }
 
 // Inisialisasi variabel
-float x, a, b, fx, fa, fb, e, nilai_error;
+float x, a, b, fx, fa, fb, e = 0.0001, nilai_error;
 
 int i, n = 10; // iterasi (n) ditentukan dengan nilai 10
 
@@ -22,13 +23,13 @@ void main() {
         up:
         system("cls");
         // Judul program
-        printf("==========================================================================================================\n");
-		printf("=================== PROGRAM PERHITUNGAN PERSAMAAN NON LINIER METODE REGULA FALSI =========================\n");
-		printf("============================== HANIF AL FATHONI 20081010001 METNUM F081 ==================================\n");
-		printf("==========================================================================================================\n");
+        printf("=============================================================================================================================\n");
+		printf("============================ PROGRAM PENCARIAN AKAR PERSAMAAN NON LINIER METODE REGULA FALSI ================================\n");
+		printf("======================================== HANIF AL FATHONI 20081010001 METNUM F081 ===========================================\n");
+		printf("=============================================================================================================================\n");
         printf("\nTentukan nilai batas bawah (a): "); // Input batas bawah
         scanf("%f", &a);
-        printf("Tentukan nilai batas ata (b): "); // Input batas atas
+        printf("Tentukan nilai batas atas (b): "); // Input batas atas
         scanf("%f", &b);
 
         fa = f(a); // Penghitungan fa dengan memasukkan nilai a ke rumus fungsi
@@ -43,8 +44,8 @@ void main() {
         }
         // Jika kondisi di atas tidak terpenuhi, maka program dilanjutkan
         else {
-            printf("\nIterasi\t\ta\t\tb\t\tx\t\tf(x)\t\t\tnilai error |f(x)|\n");
-            printf("==========================================================================================================\n");
+            printf("\nIterasi\t\ta\t\tb\t\tx\t\tf(x)\t\t\tf(a)\t\t\tf(b)\n");
+            printf("=============================================================================================================================\n");
 
             // Looping penghitungan akar
             for (i = 1; i <= n; i++) {
@@ -52,7 +53,7 @@ void main() {
                 fx = f(x); // Penghitungan x dengan memasukkan nilai x ke rumus fungsi
                 nilai_error = fabs(fx); // Penghitunan nilai error fx dengan absolut fx
 
-                printf("%d\t\t%f\t%.12f\t%.12f\t%.12f\t\t%.12f\n", i, a, b, x, fx, nilai_error);
+                printf("%d\t\t%f\t%.10f\t%.10f\t%.10f\t\t%.10f\t\t%.10f\n", i, a, b, x, fx, fa, fb);
 
                 // Kondisional if jika fx x fa < 0 maka b = x dan fb = fx
                 if (fx * fa < 0) {
@@ -72,8 +73,8 @@ void main() {
         }
 
         // Output hasil akar dan nilai error
-        printf("==========================================================================================================\n");
-        printf("\nPada iterasi ke-%d diperoleh x = %.12f dan dengan nilai error = %.12f.\n", i-1, x, nilai_error);
+        printf("=============================================================================================================================\n");
+        printf("\nAkar persamaan diperoleh di x = %.10f dan dengan nilai error = %.10f.\n", x, nilai_error);
         printf("\nTekan enter untuk melanjutkan.\n");
         getch();
 
