@@ -1,17 +1,23 @@
+// Deklarasi prepocessor directive
 #include <stdio.h>
 #include <math.h>
 
+// Deklarasi fungsi f
 float f(float x) {
     return exp(x) - 5 * (x * x);
 }
 
+// Deklarasi fungsi f aksen
 float f_aksen(float x) {
     return exp(x) - 10 * x;
 }
 
+// Deklarasi variabel
 float x0, x1, x2, f0, f1, e;
 int i, n = 10;
 
+
+// Program utama
 void main() {
     char kembali;
 
@@ -30,9 +36,9 @@ void main() {
         printf("\nIterasi\t\tx0\t\t|(x1-x0)/x1|\n");
         printf("===========================================================================\n");
 
-        x1 = x0;
+        // Looping perhitungan
         do {
-
+            // Perhitungan fungsi f dan f aksen
             f0 = f(x0);
             f1 = f_aksen(x0);
 
@@ -43,8 +49,10 @@ void main() {
                 goto up;
             }
 
+            // Perhitungan x r+1
             x1 = x0 - f0/f1;
 
+            // Perhitungan |x r+1 - xr|
             x2 = fabs((x1 - x0) / x1);
 
             printf("%d\t\t%f\t%f\n", i + 1, x0, x2);
@@ -53,6 +61,7 @@ void main() {
 
             i++;
 
+            // Kondisi jika iterasi melebihi maksimum iterasi, maka dinyatakan tidak konvergen
             if (i > n) {
                 printf("\nProses dihentikan, tidak konvergen (divergen)\n");
                 printf("Tekan enter untuk mengulangi.\n");
@@ -61,10 +70,11 @@ void main() {
             }
 
 
-        }while (x2 > e);
+        }while (x2 > e); // Penghentian looping apabila nilai |x r+1 - xr| > e
 
         printf("===========================================================================\n");
 
+        // Tampilan output hasil hampiran akar x
         printf("\nHampiran akar x = %f\n", x1);
         printf("\nTekan enter untuk melanjutkan.\n");
         getch();
